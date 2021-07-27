@@ -1,0 +1,26 @@
+const events = {
+  LOADSTART: "loadstart",
+  PROGRESS: "progress",
+  SUSPEND: "suspend",
+  ABORT: "abort",
+  ERROR: "error",
+  EMPTIED: "emptied",
+  STALLED: "stalled",
+  LOADEDMETADATA: "loadedmetadata",
+  CANPLAY: "canplay",
+  CANPLAYTHROUGH: "canplaythrough",
+  PLAYING: "playing",
+  WAITING: "waiting",
+  SEEKING: "seeking",
+  SEEKED: "seeked",
+  ENDED: "ended",
+  DURATIONCHANGE: "durationchange",
+  TIMEUPDATE: "timeupdate",
+  PLAY: "play",
+  PAUSE: "pause",
+  RATECHANGE: "ratechange",
+  RESIZE: "resize",
+  VOLUMECHANGE: "volumechange",
+}
+
+export { events }
