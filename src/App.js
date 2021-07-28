@@ -4,11 +4,10 @@ import './App.css';
 import "video.js/dist/video-js.css";
 
 import VideoJS from "./component/VideoJS";
-import VideoData from "./component/TrackVideo";
 import Plyr from 'plyr-react'
 import 'plyr-react/dist/plyr.css'
 
-import { newTracker, trackPageView } from '@snowplow/browser-tracker';
+import { newTracker } from '@snowplow/browser-tracker';
 import TrackVideo from "./component/TrackVideo";
 
 export default class Home extends React.Component {

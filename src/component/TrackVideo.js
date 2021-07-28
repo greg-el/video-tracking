@@ -1,24 +1,13 @@
 import { events } from "../events";
 import { properties } from "../properties";
+import { trackSelfDescribingEvent } from '@snowplow/browser-tracker';
 
-export default async function TrackVideo(videoId) {
+
+export default function TrackVideo(videoId) {
   const videoEvents = [];
-  let videoProperties = {};
+  const videoProperties = {};
 
-  function searchChildTreeForVideoTag(children) {
-    let queue = [...children];
-    while (queue.length >= 1) {
-      let c = queue.shift();
-      if (c.tagName === "VIDEO") {
-        return c;
-      } else {
-        queue.push(...c.childNodes);
-      }
-    }
-    return false;
-  }
-
-  async function findVideoElem() {
+  function findVideoElem() {
     let elem = document.getElementById(videoId);
     if (elem === null) {
       console.info("Couldn't find passed video id");
@@ -31,14 +20,14 @@ export default async function TrackVideo(videoId) {
       elem = elem.getElementsByTagName("VIDEO")[0];
     }
     if (elem === null) {
-      console.info("Couldn't find passed video id");
+      console.info("Couldn't find a child element with tag 'VIDEO'");
     }
     // Plyr loads in an initial blank video pointing towards https://cdn.plyr.io/static/blank.mp4
     // so we need to check to see when currentSrc updates
     if (elem.currentSrc === "https://cdn.plyr.io/static/blank.mp4" || elem.currentSrc === "") {
       setTimeout(_ => findVideoElem(), 1000);
     } else {
-      return elem;
+      getData(elem);
     }
   }
 
@@ -46,35 +35,18 @@ export default async function TrackVideo(videoId) {
     videoEvents.unshift(e.type);
   }
 
-  async function getData(videoElem) {
+  function getData(videoElem) {
     for (let v of Object.values(events)) {
-      videoElem?.addEventListener(v, eventHandler)
+      videoElem.addEventListener(v, eventHandler)
     }
-    let tempProps = {};
     for (let v of Object.values(properties)) {
-      tempProps[v] = () => { return videoElem[v]?.toString() }
+      videoProperties[v] = () => { return videoElem[v].toString() }
     }
-    videoProperties = tempProps;
   }
 
-  const setup = async() => {
-    await findVideoElem().then(e => console.log(e))
-  }
+  findVideoElem();
+  setInterval(() => console.log(videoEvents), 1000);
+  setInterval(() => console.log(videoProperties), 1000)
 
-  setup();
-  //setInterval(() => console.log(videoEvents), 1000);
-  function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
 
-async function demo() {
-  console.log('2...');
-  await sleep(2000);
-  console.log('3...');
-}
-
-document.writeln('1...');
-demo().then(() => {
-    console.log('4.');
-});
 }
