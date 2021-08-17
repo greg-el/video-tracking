@@ -1,0 +1,164 @@
+{
+  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0",
+  "description": "Context Schema for a media player event",
+  "self": {
+    "vendor": "org.whatwg",
+    "name": "media_element",
+    "format": "jsonschema",
+    "version": "1-0-0"
+  },
+  "type": "object",
+  "properties": {
+    "audio_tracks": {
+      "type": "array",
+      "description": "A list of the AudioTrack objects in the media"
+    },
+    "auto_play": {
+      "type": "boolean",
+      "description": "If playback should automatically begin as soon as enough media is available to do so without interruption."
+    },
+    "buffered": {
+      "type": "array",
+      "description": "Time range(s) of the media resource that has been buffered"
+    },
+    "controls": {
+      "type": "boolean",
+      "description": "If the user agent should provide it's own set of controls"
+    },
+    "cross_origin": {
+      "type": ["string", "null"],
+      "description": "CORS settings value of the media player"
+    },
+    "current_source": {
+      "type": "string",
+      "description": "The absolute URL of the media resource"
+    },
+    "current_time": {
+      "type": "number",
+      "description": "The current playback time",
+      "minimum": 0
+    },
+    "default_muted": {
+      "type": "boolean",
+      "description": "If audio is muted by default"
+    },
+    "default_playback_rate": {
+      "type": "number",
+      "description": "The default media playback rate of the player",
+      "minimum": 0,
+      "exclusiveMinimum": true
+    },
+    "disable_remote_playback": {
+      "type": "boolean",
+      "description": "If the media element is allowed to have a remote playback UI"
+    },
+    "duration": {
+      "type": ["number", "null"],
+      "description": "Total length of media in seconds",
+      "minimum": 0
+    },
+    "ended": {
+      "type": "boolean",
+      "description": "If playback of the media has ended"
+    },
+    "error": {
+      "type": ["string", "null"],
+      "description": "A 'MediaError' object of the latest error to occur, or null if no errors"
+    },
+    "loop": {
+      "type": "boolean",
+      "description": "If the video restarts after ended"
+    },
+    "muted": {
+      "type": "boolean",
+      "description": "Audio is muted"
+    },
+    "network_state": {
+      "type": "string",
+      "enum": ["NETWORK_EMPTY", "NETWORK_IDLE", "NETWORK_LOADING", "NETWORK_NO_SOURCE"],
+      "description": "The current state of the fetching of media over the network"
+    },
+    "paused": {
+      "type": "boolean",
+      "description": "If the media is paused"
+    },
+    "playback_rate": {
+      "type": "number",
+      "description": "Playback rate relative to 1 (normal speed)",
+      "minimum": 0,
+      "exclusiveMinimum": true
+    },
+    "played": {
+      "type": "object",
+      "description": "A range of times played of the media source"
+    },
+    "preload": {
+      "type": "string",
+      "description": "The 'preload' HTML attribute of the media"
+    },
+    "ready_state": {
+      "type": "string",
+      "enum": ["HAVE_NOTHING", "HAVE_METADATA", "HAVE_CURRENT_DATA", "HAVE_FUTURE_DATA", "HAVE_ENOUGH_DATA"],
+      "description": "The readiness of the media"
+    },
+    "seekable": {
+      "type": "array",
+      "description": "Seekable range(s) of the media"
+    },
+    "seeking": {
+      "type": "boolean",
+      "description": "If the media is in the process of seeking to a new position"
+    },
+    "src": {
+      "type": "string",
+      "description": "The 'src' HTML attribute of the media element"
+    },
+    "src_object": {
+      "type": ["object", "null"],
+      "description": "The 'srcObject' property of the HTML media element"
+    },
+    "text_tracks": {
+      "type": "object",
+      "description": "A list of TextTrack objects on the media element"
+    },
+    "video_tracks": {
+      "type": "array",
+      "description": "A list of VideoTrack objects on the media element"
+    },
+    "volume": {
+      "type": "number",
+      "description": "Volume level",
+      "minimum": 0,
+      "maximum": 1
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "auto_play",
+    "buffered",
+    "controls",
+    "cross_origin",
+    "current_source",
+    "current_time",
+    "default_muted",
+    "default_playback_rate",
+    "duration",
+    "ended",
+    "error",
+    "loop",
+    "media_type",
+    "muted",
+    "network_state",
+    "paused",
+    "playback_rate",
+    "player_id",
+    "preload",
+    "ready_state",
+    "seekable",
+    "seeking",
+    "src",
+    "src_object",
+    "text_tracks",
+    "volume"
+  ]
+}
